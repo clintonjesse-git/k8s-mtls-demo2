@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo2
+  namespace: demo2
+  annotations:
+    nginx.ingress.kubernetes.io/auth-tls-secret: demo2/demo2-client-ca
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+    nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
+    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - demo2.local
+      secretName: demo2-tls
+  rules:
+    - host: demo2.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: demo2
+                port:
+                  number: 80
