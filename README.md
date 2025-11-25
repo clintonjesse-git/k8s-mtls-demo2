@@ -93,9 +93,7 @@ Output should be: 400 No required SSL certificate was sent
 
 
 Testing mTLS with client certificate(which should return Hello World):
-curl -kv --resolve demo2.local:8443:127.0.0.1 \
-  --cert certs/client2.crt --key certs/client2.key \
-  https://demo2.local:8443/
+curl -kv --resolve demo2.local:8443:127.0.0.1 \--cert certs/client2.crt --key certs/client2.key \https://demo2.local:8443/
 
 Output should be: Hello from Demo2 over mTLS! Verified client: CN=Demo2 Client
 
