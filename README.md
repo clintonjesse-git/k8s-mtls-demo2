@@ -85,10 +85,12 @@ Apply manifests: kubectl apply -f k8s/deployment.yaml
 Deploy Ingress with mTLS Enforcement:
 kubectl apply -f k8s/ingress.yaml
 
+
 Testing mTLS without client certificate(which should be rejected): 
-kubectl apply -f k8s/ingress.yaml
+curl -kv --resolve demo2.local:8443:127.0.0.1 https://demo2.local:8443/	
 
 Output should be: 400 No required SSL certificate was sent
+
 
 Testing mTLS with client certificate(which should return Hello World):
 curl -kv --resolve demo2.local:8443:127.0.0.1 \
